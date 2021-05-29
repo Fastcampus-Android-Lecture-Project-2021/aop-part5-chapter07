@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/home_dest">
+
+    <fragment
+        android:id="@+id/home_dest"
+        android:name="fastcampus.aop.part5.chapter07.presentation.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home">
+
+        <action
+            android:id="@+id/to_movie_reviews_action"
+            app:destination="@id/movie_reviews_dest" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/my_page_dest"
+        android:name="fastcampus.aop.part5.chapter07.presentation.mypage.MyPageFragment"
+        android:label="@string/title_my_page"
+        tools:layout="@layout/fragment_my_page">
+
+        <action
+            android:id="@+id/to_movie_reviews_action"
+            app:destination="@id/movie_reviews_dest" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/movie_reviews_dest"
+        android:name="fastcampus.aop.part5.chapter07.presentation.reviews.MovieReviewsFragment"
+        android:label="@string/title_movie_reviews"
+        tools:layout="@layout/fragment_movie_reviews">
+
+    </fragment>
+
+</navigation>

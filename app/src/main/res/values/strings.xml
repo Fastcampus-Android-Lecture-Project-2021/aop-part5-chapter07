@@ -1,6 +1,8 @@
 <resources>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
     <string name="app_name">aop-part5-chapter07</string>
+
+    <string name="title_home">영화</string>
+    <string name="title_my_page">내 리뷰</string>
+    <string name="title_movie_reviews">영화 상세</string>
+
 </resources>
