@@ -12,6 +12,9 @@ import fastcampus.aop.part5.chapter07.data.repository.ReviewRepository
 import fastcampus.aop.part5.chapter07.data.repository.ReviewRepositoryImpl
 import fastcampus.aop.part5.chapter07.domain.usecase.GetAllMoviesUseCase
 import fastcampus.aop.part5.chapter07.domain.usecase.GetRandomFeaturedMovieUseCase
+import fastcampus.aop.part5.chapter07.presentation.home.HomeFragment
+import fastcampus.aop.part5.chapter07.presentation.home.HomeContract
+import fastcampus.aop.part5.chapter07.presentation.home.HomePresenter
 import kotlinx.coroutines.Dispatchers
 import org.koin.dsl.module
 
@@ -35,4 +38,7 @@ val domainModule = module {
 }
 
 val presenterModule = module {
+    scope<HomeFragment> {
+        scoped<HomeContract.Presenter> { HomePresenter(getSource(), get(), get()) }
+    }
 }

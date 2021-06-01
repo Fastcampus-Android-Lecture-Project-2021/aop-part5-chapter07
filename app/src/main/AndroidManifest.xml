@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="fastcampus.aop.part5.chapter07">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".MovieReviewApplication"
         android:allowBackup="true"
@@ -9,8 +11,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Aoppart5chapter07">
-        
+        android:theme="@style/Theme.Aoppart5chapter07"
+        android:usesCleartextTraffic="true">
+
         <activity
             android:name=".presentation.MainActivity"
             android:label="@string/app_name">
