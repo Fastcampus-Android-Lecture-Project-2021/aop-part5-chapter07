@@ -2,7 +2,9 @@ package fastcampus.aop.part5.chapter07
 
 import android.app.Application
 import fastcampus.aop.part5.chapter07.di.appModule
-import fastcampus.aop.part5.chapter07.utility.MovieDataGenerator
+import fastcampus.aop.part5.chapter07.di.dataModule
+import fastcampus.aop.part5.chapter07.di.domainModule
+import fastcampus.aop.part5.chapter07.di.presenterModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -21,9 +23,7 @@ class MovieReviewApplication : Application() {
                 }
             )
             androidContext(this@MovieReviewApplication)
-            modules(appModule)
+            modules(appModule + dataModule + domainModule + presenterModule)
         }
-
-        MovieDataGenerator().generate()
     }
 }
