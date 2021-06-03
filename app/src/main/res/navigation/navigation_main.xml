@@ -35,6 +35,10 @@
         android:label="@string/title_movie_reviews"
         tools:layout="@layout/fragment_movie_reviews">
 
+        <argument
+            android:name="movie"
+            app:argType="fastcampus.aop.part5.chapter07.domain.model.Movie" />
+
     </fragment>
 
 </navigation>

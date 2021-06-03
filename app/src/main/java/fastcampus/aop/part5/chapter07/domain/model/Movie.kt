@@ -1,7 +1,10 @@
 package fastcampus.aop.part5.chapter07.domain.model
 
 import com.google.firebase.firestore.DocumentId
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Movie(
     @DocumentId
     val id: String? = null,
@@ -20,4 +23,4 @@ data class Movie(
     val numberOfScore: Int? = null,
     val releaseYear: Int? = null,
     val runtime: Int? = null
-)
+) : Parcelable
