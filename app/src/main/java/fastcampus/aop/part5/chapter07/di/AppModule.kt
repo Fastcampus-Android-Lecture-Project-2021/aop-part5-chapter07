@@ -15,6 +15,9 @@ import fastcampus.aop.part5.chapter07.domain.usecase.GetRandomFeaturedMovieUseCa
 import fastcampus.aop.part5.chapter07.presentation.home.HomeContract
 import fastcampus.aop.part5.chapter07.presentation.home.HomeFragment
 import fastcampus.aop.part5.chapter07.presentation.home.HomePresenter
+import fastcampus.aop.part5.chapter07.presentation.mypage.MyPageContract
+import fastcampus.aop.part5.chapter07.presentation.mypage.MyPageFragment
+import fastcampus.aop.part5.chapter07.presentation.mypage.MyPagePresenter
 import fastcampus.aop.part5.chapter07.presentation.reviews.MovieReviewsContract
 import fastcampus.aop.part5.chapter07.presentation.reviews.MovieReviewsFragment
 import fastcampus.aop.part5.chapter07.presentation.reviews.MovieReviewsPresenter
@@ -56,5 +59,8 @@ val presenterModule = module {
         scoped<MovieReviewsContract.Presenter> { (movie: Movie) ->
             MovieReviewsPresenter(movie, getSource(), get())
         }
+    }
+    scope<MyPageFragment> {
+        scoped<MyPageContract.Presenter> { MyPagePresenter(getSource(), get()) }
     }
 }
