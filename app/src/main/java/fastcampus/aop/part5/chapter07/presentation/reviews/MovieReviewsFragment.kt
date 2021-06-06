@@ -1,15 +1,20 @@
 package fastcampus.aop.part5.chapter07.presentation.reviews
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import fastcampus.aop.part5.chapter07.databinding.FragmentMovieReviewsBinding
 import fastcampus.aop.part5.chapter07.domain.model.Movie
+import fastcampus.aop.part5.chapter07.domain.model.MovieReviews
 import fastcampus.aop.part5.chapter07.domain.model.Review
 import org.koin.android.scope.ScopeFragment
 import org.koin.core.parameter.parametersOf
@@ -55,16 +60,39 @@ class MovieReviewsFragment : ScopeFragment(), MovieReviewsContract.View {
     }
 
     override fun showMovieInformation(movie: Movie) {
-        binding?.recyclerView?.adapter = MovieReviewsAdapter(movie)
+        binding?.recyclerView?.adapter = MovieReviewsAdapter(movie).apply {
+            onReviewSubmitButtonClickListener = { content, score ->
+                presenter.requestAddReview(content, score)
+                hideKeyboard()
+            }
+            onReviewDeleteButtonClickListener = { review ->
+                showDeleteConfirmDialog(review)
+            }
+        }
     }
 
-    override fun showReviews(reviews: List<Review>) {
+    private fun showDeleteConfirmDialog(review: Review) {
+        AlertDialog.Builder(requireContext())
+            .setMessage("정말로 리뷰를 삭제하시겠어요?")
+            .setPositiveButton("삭제할래요") { _, _ ->
+                presenter.requestRemoveReview(review)
+            }
+            .setNegativeButton("안할래요") { _, _ -> }
+            .show()
+    }
+
+    override fun showReviews(reviews: MovieReviews) {
         binding?.recyclerView?.isVisible = true
         binding?.errorDescriptionTextView?.isVisible = false
         (binding?.recyclerView?.adapter as? MovieReviewsAdapter)?.apply {
-            this.reviews = reviews
+            this.myReview = reviews.myReview
+            this.reviews = reviews.othersReview
             notifyDataSetChanged()
         }
+    }
+
+    override fun showErrorToast(message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
     private fun initViews() {
@@ -75,5 +103,10 @@ class MovieReviewsFragment : ScopeFragment(), MovieReviewsContract.View {
                 false
             )
         }
+    }
+
+    private fun hideKeyboard() {
+        val inputMethodManager = context?.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(activity?.currentFocus?.windowToken, 0)
     }
 }
