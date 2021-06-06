@@ -8,10 +8,7 @@ import fastcampus.aop.part5.chapter07.data.preference.PreferenceManager
 import fastcampus.aop.part5.chapter07.data.preference.SharedPreferenceManager
 import fastcampus.aop.part5.chapter07.data.repository.*
 import fastcampus.aop.part5.chapter07.domain.model.Movie
-import fastcampus.aop.part5.chapter07.domain.usecase.GetAllMoviesUseCase
-import fastcampus.aop.part5.chapter07.domain.usecase.GetAllMovieReviewsUseCase
-import fastcampus.aop.part5.chapter07.domain.usecase.GetMyReviewedMoviesUseCase
-import fastcampus.aop.part5.chapter07.domain.usecase.GetRandomFeaturedMovieUseCase
+import fastcampus.aop.part5.chapter07.domain.usecase.*
 import fastcampus.aop.part5.chapter07.presentation.home.HomeContract
 import fastcampus.aop.part5.chapter07.presentation.home.HomeFragment
 import fastcampus.aop.part5.chapter07.presentation.home.HomePresenter
@@ -49,6 +46,8 @@ val domainModule = module {
     factory { GetAllMoviesUseCase(get()) }
     factory { GetAllMovieReviewsUseCase(get()) }
     factory { GetMyReviewedMoviesUseCase(get(), get(), get()) }
+    factory { SubmitReviewUseCase(get(), get()) }
+    factory { DeleteReviewUseCase(get()) }
 }
 
 val presenterModule = module {
